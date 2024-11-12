@@ -20,11 +20,6 @@ public class EthNumericRef implements ValueRef<EthNumeric<?>> {
     }
 
     @Override
-    public EthNumeric<?> value() {
-        return value;
-    }
-
-    @Override
     public boolean toBoolean() {
         return value.toBoolean();
     }
@@ -87,5 +82,13 @@ public class EthNumericRef implements ValueRef<EthNumeric<?>> {
     @Override
     public String toPlainString() {
         return value.toPlainString();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof EthNumericRef numericRef) {
+            return value.equals(numericRef.value);
+        }
+        return false;
     }
 }

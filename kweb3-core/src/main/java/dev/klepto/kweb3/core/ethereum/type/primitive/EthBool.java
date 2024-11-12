@@ -1,5 +1,6 @@
 package dev.klepto.kweb3.core.ethereum.type.primitive;
 
+import dev.klepto.kweb3.core.ethereum.type.EthNumeric;
 import dev.klepto.kweb3.core.ethereum.type.reference.ValueRef;
 import lombok.val;
 import org.jetbrains.annotations.NotNull;
@@ -113,6 +114,11 @@ public class EthBool extends EthUint {
     @Override
     public int hashCode() {
         return Objects.hash(check());
+    }
+
+    @Override
+    public boolean equals(@Nullable Object object) {
+        return EthNumeric.valueEquals(this, object);
     }
 
     @Override

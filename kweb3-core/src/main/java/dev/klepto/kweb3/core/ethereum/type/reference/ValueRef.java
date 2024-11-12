@@ -63,14 +63,7 @@ public interface ValueRef<T> {
     static ByteBufferRef of(boolean signed, ByteBuffer value) {
         return new ByteBufferRef(signed, value);
     }
-
-    /**
-     * Returns the value of this reference.
-     *
-     * @return the value of this reference
-     */
-    T value();
-
+    
     /**
      * Converts the value to a {@link Boolean}.
      *
@@ -161,4 +154,5 @@ public interface ValueRef<T> {
      * @return value as a plain {@link String}
      */
     String toPlainString();
+
 }

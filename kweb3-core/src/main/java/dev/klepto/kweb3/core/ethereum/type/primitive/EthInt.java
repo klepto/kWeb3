@@ -121,7 +121,12 @@ public class EthInt extends Number implements EthNumeric<EthInt>, EthNumeric.Mat
     }
 
     @Override
-    public @NotNull EthInt value(@NotNull ValueRef<?> valueRef) {
+    public ValueRef<?> valueRef() {
+        return valueRef;
+    }
+
+    @Override
+    public @NotNull EthInt valueRef(@NotNull ValueRef<?> valueRef) {
         return new EthInt(valueRef, bitSize);
     }
 
@@ -148,10 +153,7 @@ public class EthInt extends Number implements EthNumeric<EthInt>, EthNumeric.Mat
 
     @Override
     public boolean equals(@Nullable Object object) {
-        if (object instanceof Number number) {
-            return equals(number);
-        }
-        return false;
+        return EthNumeric.valueEquals(this, object);
     }
 
     public boolean matches(@Nullable Object object) {

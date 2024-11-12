@@ -117,7 +117,12 @@ public class EthBytes extends Number implements EthNumeric<EthBytes>, EthNumeric
     }
 
     @Override
-    public @NotNull EthBytes value(@NotNull ValueRef<?> valueRef) {
+    public ValueRef<?> valueRef() {
+        return valueRef;
+    }
+
+    @Override
+    public @NotNull EthBytes valueRef(@NotNull ValueRef<?> valueRef) {
         return new EthBytes(valueRef, byteSize);
     }
 
@@ -135,10 +140,7 @@ public class EthBytes extends Number implements EthNumeric<EthBytes>, EthNumeric
 
     @Override
     public boolean equals(@Nullable Object object) {
-        if (object instanceof Number number) {
-            return equals(number);
-        }
-        return false;
+        return EthNumeric.valueEquals(this, object);
     }
 
     public boolean matches(@Nullable Object object) {

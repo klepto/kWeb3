@@ -23,11 +23,6 @@ public class ByteBufferRef implements ValueRef<ByteBuffer> {
     }
 
     @Override
-    public ByteBuffer value() {
-        return value.duplicate();
-    }
-
-    @Override
     public boolean toBoolean() {
         return toByte() == 1;
     }
@@ -86,7 +81,7 @@ public class ByteBufferRef implements ValueRef<ByteBuffer> {
 
     @Override
     public ByteBuffer toByteBuffer() {
-        return value();
+        return value;
     }
 
     @Override
@@ -110,6 +105,14 @@ public class ByteBufferRef implements ValueRef<ByteBuffer> {
 
     private boolean isReadable(int bytes) {
         return value.remaining() >= bytes;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof ByteBufferRef bufferRef) {
+            return value.equals(bufferRef.value);
+        }
+        return false;
     }
 
     private static final byte[] EMPTY = new byte[0];

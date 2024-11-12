@@ -2,6 +2,7 @@ package dev.klepto.kweb3.core.ethereum.type.primitive;
 
 import com.esaulpaugh.headlong.abi.Address;
 import com.google.common.base.Strings;
+import dev.klepto.kweb3.core.ethereum.type.EthNumeric;
 import dev.klepto.kweb3.core.ethereum.type.reference.ValueRef;
 import lombok.val;
 import org.jetbrains.annotations.NotNull;
@@ -101,10 +102,7 @@ public class EthAddress extends EthUint {
 
     @Override
     public boolean equals(@Nullable Object object) {
-        if (object instanceof Number number) {
-            return equals(number);
-        }
-        return false;
+        return EthNumeric.valueEquals(this, object);
     }
 
     public boolean matches(@Nullable Object object) {

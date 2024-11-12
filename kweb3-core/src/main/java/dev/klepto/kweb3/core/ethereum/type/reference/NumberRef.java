@@ -21,43 +21,38 @@ public class NumberRef implements ValueRef<Number> {
     }
 
     @Override
-    public Number value() {
-        return value;
-    }
-
-    @Override
     public boolean toBoolean() {
         return toByte() == 1;
     }
 
     @Override
     public byte toByte() {
-        return value().byteValue();
+        return value.byteValue();
     }
 
     @Override
     public short toShort() {
-        return value().shortValue();
+        return value.shortValue();
     }
 
     @Override
     public int toInt() {
-        return value().intValue();
+        return value.intValue();
     }
 
     @Override
     public long toLong() {
-        return value().longValue();
+        return value.longValue();
     }
 
     @Override
     public float toFloat() {
-        return value().floatValue();
+        return value.floatValue();
     }
 
     @Override
     public double toDouble() {
-        return value().doubleValue();
+        return value.doubleValue();
     }
 
     @Override
@@ -98,6 +93,33 @@ public class NumberRef implements ValueRef<Number> {
     @Override
     public String toPlainString() {
         return toBigInteger().toString();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof NumberRef numberRef) {
+            return numberEquals(value, numberRef.value);
+        }
+        return false;
+    }
+
+    /**
+     * Compares two numbers for equality.
+     *
+     * @param numberA number to compare
+     * @param numberB number to compare
+     * @return true if numbers are equal, false otherwise
+     */
+    private static boolean numberEquals(Number numberA, Number numberB) {
+        if (numberA instanceof BigInteger && numberB instanceof BigInteger) {
+            return numberA.equals(numberB);
+        } else if (numberA instanceof BigDecimal && numberB instanceof BigDecimal) {
+            return numberA.equals(numberB);
+        } else if ((numberA instanceof Double || numberA instanceof Float)
+                && (numberB instanceof Double || numberB instanceof Float)) {
+            return numberA.doubleValue() == numberB.doubleValue();
+        }
+        return numberA.longValue() == numberB.longValue();
     }
 
 }

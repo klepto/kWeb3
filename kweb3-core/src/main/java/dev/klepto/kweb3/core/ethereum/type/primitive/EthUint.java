@@ -121,7 +121,12 @@ public class EthUint extends Number implements EthNumeric<EthUint>, EthNumeric.M
     }
 
     @Override
-    public @NotNull EthUint value(@NotNull ValueRef<?> valueRef) {
+    public @NotNull ValueRef<?> valueRef() {
+        return valueRef;
+    }
+
+    @Override
+    public @NotNull EthUint valueRef(@NotNull ValueRef<?> valueRef) {
         return new EthUint(valueRef, bitSize);
     }
 
@@ -145,11 +150,9 @@ public class EthUint extends Number implements EthNumeric<EthUint>, EthNumeric.M
         return Objects.hash(bitSize, toBigInteger());
     }
 
+    @Override
     public boolean equals(@Nullable Object object) {
-        if (object instanceof Number number) {
-            return equals(number);
-        }
-        return false;
+        return EthNumeric.valueEquals(this, object);
     }
 
     public boolean matches(Object object) {
